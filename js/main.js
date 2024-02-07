@@ -1,4 +1,6 @@
 window.onload = function () {
+  // AOS 적용
+  AOS.init();
   //상단 스크롤 기능
   const header = document.querySelector(".header");
   const mbt = document.querySelector(".mbt");
