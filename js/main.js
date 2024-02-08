@@ -1,5 +1,5 @@
 window.onload = function () {
-  // AOS 적용
+  // AOS적용
   AOS.init();
   //상단 스크롤 기능
   const header = document.querySelector(".header");
@@ -50,7 +50,7 @@ window.onload = function () {
     }
   });
 
-  // swiper 적용
+  // swiper적용
   const swiper = new Swiper(".sw-visual", {
     effect: "fade",
     loop: true,
@@ -63,5 +63,57 @@ window.onload = function () {
       // 이것을 방지해 주기위한 처리
       disableOnInteraction: false,
     },
+    navigation: {
+      nextEl: ".sw-visual-next",
+      prevEl: ".sw-visual-prev",
+    },
+  });
+
+  // besiness 스와퍼 적용
+  const swBusiness = new Swiper(".sw-business", {
+    breakpoints: {
+      slidesPerView: 1,
+      640: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+  });
+  // =======위로가기 버튼 기능
+  const gotop = document.querySelector(".gotop");
+  gotop.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  let footer = document.querySelector(".footer");
+  let footerY = footer.offsetTop;
+  // console.log(footerY);
+  let waypoint_footer = new Waypoint({
+    element: document.querySelector(".footer"),
+    handler: function (direction) {
+      if (direction === "down") {
+        gotop.classList.add("active-footer");
+      }
+      else{
+        gotop.classList.remove("active-footer");
+      }
+    },
+    offset: "95%",
+  });
+  let waypoint_service = new Waypoint({
+    element: document.querySelector(".service"),
+    handler: function (direction) {
+      if (direction === "down") {
+        gotop.classList.add("active");
+      } else {
+        gotop.classList.remove("active");
+      }
+    },
+    offset: "80%",
   });
 };
